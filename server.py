@@ -14,6 +14,10 @@ login_manager.init_app(app)
 
 app.jinja_env.undefined = StrictUndefined
 
+@app.route('/')
+def home():
+    return render_template('base.html')
+
 
 
 

@@ -4,7 +4,7 @@
         "tools": [
             "Kayak",
             "Helmet",
-            "Straps for car"
+            "Straps"
 
         ],
         "cost": 100,
@@ -13,7 +13,7 @@
     {
         "kind": "Off Roading",
         "tools": [
-            "All Terain Tires",
+            "AT Tires",
             "Rescue Belt"
         ],
         "cost": 50,
@@ -33,7 +33,7 @@
         "kind": "Canoing",
         "tools": [
             "Canoe",
-            "camelpack",
+            "Camelpack",
             "Helmet"
 
         ],
@@ -43,8 +43,8 @@
     {
         "kind": "Fishing",
         "tools": [
-            "Fishing pools",
-            "Fish bate"
+            "Fishing Pools",
+            "Fishing Bait"
         ],
         "cost": 60,
         "user_id": 6

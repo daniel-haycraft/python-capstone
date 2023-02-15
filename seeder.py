@@ -8,6 +8,8 @@ from datetime import datetime
 import model
 import server
 
+
+        
 with server.app.app_context():
         os.system('dropdb capstone')
         os.system('createdb capstone')
@@ -35,6 +37,8 @@ with server.app.app_context():
                                 act['cost'],
                                 act['user_id']
                         )
+                        
+                                # maybe use an iterable?
                         db_act = model.Activity.create_activity(kind, tools, cost, user_id)
                         act_in_db.append(db_act)
                         model.db.session.add_all(act_in_db)
