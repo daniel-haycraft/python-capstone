@@ -7,6 +7,14 @@
     <title>TBD</title>
 </head>
 <body>
-    
+{%block body%}
+
+{%endblock%}
+
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-success" role="alert">
+        {{message}}
+    </div>
+{%endfor%}
 </body>
 </html>

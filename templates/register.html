@@ -1,7 +1,16 @@
 {%extends 'base.html'%}
 
-{%block block %}
+{%block body %}
 <form action="{{ url_for('register')}}" method="POST">
-    {{}}
+    <h6>Email</h6>
+    {{register.csrf_token()}}
+    {{register.email}}
+    <br>
+    <h6>Password</h6>
+    {{register.password(type='password')}}
+    <br>
+    <h6>Password</h6>
+    {{register.double_password(type='password')}}
+    {{register.submit}}
 </form>
 {%endblock%}

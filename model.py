@@ -2,6 +2,7 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 
@@ -10,14 +11,31 @@ class User(db.Model, UserMixin):
     __tablename__ = "users"
 
     id = db.Column(db.Integer,autoincrement=True,primary_key=True)
-    email = db.Column(db.String, unique=True, nullable = False)
+    email = db.Column(db.String(30), unique=True, nullable = False)
     password = db.Column(db.String, nullable = False)
 
     def __repr__(self):
         return f'<email_id = {self.id} email={self.email}>'
+
+    def __init__(self, email, password):
+        self.email = email
+        self.password = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
+
+
     @classmethod
     def create_user(cls, email, password):
         return cls(email = email,password= password)
+    
+    @classmethod
+    def check_users(cls, em):
+        return cls.query.filter_by(email=em).first()
+
+    @classmethod
+    def get_user_id(cls, user_id):
+        return cls.query.filter_by(id = user_id).first()
         
 
 # cvs cloud inary 
