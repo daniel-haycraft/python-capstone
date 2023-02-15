@@ -1,0 +1,83 @@
+[
+    {
+        "kind": "Kayaking",
+        "tools": [
+            "Kayak",
+            "Helmet",
+            "Straps for car"
+
+        ],
+        "cost": 100,
+        "user_id": 2
+    },
+    {
+        "kind": "Off Roading",
+        "tools": [
+            "All Terain Tires",
+            "Rescue Belt"
+        ],
+        "cost": 50,
+        "user_id": 3
+    },
+    {
+        "kind": "Hiking",
+        "tools": [
+            "Swim Suit",
+            "Water",
+            "Snacks"
+        ],
+        "cost": 50,
+        "user_id": 4
+    },
+    {
+        "kind": "Canoing",
+        "tools": [
+            "Canoe",
+            "camelpack",
+            "Helmet"
+
+        ],
+        "cost": 100,
+        "user_id": 5
+    },
+    {
+        "kind": "Fishing",
+        "tools": [
+            "Fishing pools",
+            "Fish bate"
+        ],
+        "cost": 60,
+        "user_id": 6
+    },
+    {
+        "kind": "Water Ski",
+        "tools": [
+            "Boat",
+            "Life Jacket",
+            "Water Skis"
+
+        ],
+        "cost": 150,
+        "user_id": 7
+    },
+    {
+        "kind": "Camping",
+        "tools": [
+            "Food",
+            "Water",
+            "Shelter"
+        ],
+        "cost": 100,
+        "user_id": 8
+    },
+    {
+        "kind": "moutain biking",
+        "tools": [
+            "Moutain Bike",
+            "Camelpack",
+            "Helmet"
+        ],
+        "cost": 100,
+        "user_id": 9
+    }
+]

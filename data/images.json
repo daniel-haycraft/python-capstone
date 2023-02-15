@@ -1,0 +1,65 @@
+[
+    {
+        
+        "image_path": "Kayaking",
+        "location": "Canyon Lake",
+        "weather": "Sunny",
+        "user_id": 2,
+        "activity_id": 2
+        
+    },
+    {
+        "image_path": "Off Roading",
+        "location": "Sycamore Creek, Az",
+        "weather": "Sunny",
+        "user_id": 3,
+        "activity_id": 3
+        
+    },
+    {
+        "image_path": "hiking",
+        "location": "Fossil Creek, Az",
+        "weather": "Rainy",
+        "user_id": 4,
+        "activity_id": 4
+        
+    },
+    {
+        
+        "image_path": "Canoe",
+        "location": "Salt River, Az",
+        "weather": "Sunny",
+        "user_id": 5,
+        "activity_id": 5
+        
+    },
+
+    {
+        
+        "image_path": "Fishing",
+        "location": "Roosevelt, Az",
+        "weather": "Cloudy and windy",
+        "user_id": 6,
+        "activity_id": 6
+        
+    },
+    {
+        
+        "image_path": "Water Ski",
+        "location": "Canyon Lake",
+        "weather": "Cloudy",
+        "user_id": 7,
+        "activity_id": 7
+        
+    },
+    {
+        
+        "image_path": "Camping",
+        "location": "Nothern Rim, Payson",
+        "weather": "Cloudy",
+        "user_id": 8,
+        "activity_id": 8
+        
+    }
+
+]
