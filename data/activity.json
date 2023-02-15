@@ -5,10 +5,9 @@
             "Kayak",
             "Helmet",
             "Straps"
-
         ],
         "cost": 100,
-        "user_id": 2
+        "user_id": 1
     },
     {
         "kind": "Off Roading",
@@ -17,7 +16,7 @@
             "Rescue Belt"
         ],
         "cost": 50,
-        "user_id": 3
+        "user_id": 2
     },
     {
         "kind": "Hiking",
@@ -27,7 +26,7 @@
             "Snacks"
         ],
         "cost": 50,
-        "user_id": 4
+        "user_id": 3
     },
     {
         "kind": "Canoing",
@@ -38,7 +37,7 @@
 
         ],
         "cost": 100,
-        "user_id": 5
+        "user_id": 4
     },
     {
         "kind": "Fishing",
@@ -47,7 +46,7 @@
             "Fishing Bait"
         ],
         "cost": 60,
-        "user_id": 6
+        "user_id": 5
     },
     {
         "kind": "Water Ski",
@@ -58,7 +57,7 @@
 
         ],
         "cost": 150,
-        "user_id": 7
+        "user_id": 6
     },
     {
         "kind": "Camping",
@@ -68,7 +67,7 @@
             "Shelter"
         ],
         "cost": 100,
-        "user_id": 8
+        "user_id": 7
     },
     {
         "kind": "moutain biking",
@@ -78,6 +77,6 @@
             "Helmet"
         ],
         "cost": 100,
-        "user_id": 9
+        "user_id": 8
     }
 ]

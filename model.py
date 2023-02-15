@@ -12,13 +12,15 @@ class User(db.Model, UserMixin):
 
     id = db.Column(db.Integer,autoincrement=True,primary_key=True)
     email = db.Column(db.String(30), unique=True, nullable = False)
+    username = db.Column(db.String(20), unique=True, nullable= False )
     password = db.Column(db.String, nullable = False)
 
     def __repr__(self):
         return f'<email_id = {self.id} email={self.email}>'
 
-    def __init__(self, email, password):
+    def __init__(self, email, username,password):
         self.email = email
+        self.username = username
         self.password = generate_password_hash(password)
 
     def check_password(self, password):
@@ -26,17 +28,21 @@ class User(db.Model, UserMixin):
 
 
     @classmethod
-    def create_user(cls, email, password):
-        return cls(email = email,password= password)
+    def create_user(cls, email, username, password):
+        return cls(email = email, username = username, password= password)
     
     @classmethod
-    def check_users(cls, em):
-        return cls.query.filter_by(email=em).first()
+    def check_users(cls, em, username):
+        return cls.query.filter_by(email=em).first() and cls.query.filter_by(username=username).first()
 
     @classmethod
     def get_user_id(cls, user_id):
         return cls.query.filter_by(id = user_id).first()
-        
+
+    @classmethod
+    def get_all_users(cls):
+        return cls.query.all()
+
 
 # cvs cloud inary 
 class Activity(db.Model):
@@ -57,8 +63,12 @@ class Activity(db.Model):
             # create method for tools so they already come out as "commas"
 
     @classmethod
-    def create_activity(cls, kind, tools, cost, user_id):
-        return cls(kind=kind, tools=tools, cost=cost, user_id = user_id)
+    def create_activity(cls, kind, tools, cost, user):
+        return cls(kind=kind, tools=tools, cost=cost, user_id = user)
+    
+    @classmethod
+    def get_all_activities(cls):
+        return cls.query.all()
 
 
 class Image(db.Model):
@@ -76,11 +86,15 @@ class Image(db.Model):
     user = db.relationship("User", backref="images")
 
     def __repr__(self):
-        return f'<image_id={self.image_id} name={self.image_name}>'
+        return f'<image_id={self.image_id} name={self.image_path}>'
     
     @classmethod
     def create_image(cls, image_path, location, weather, user_id, activity_id):
         return cls(image_path=image_path, location= location, weather=weather, user_id=user_id, activity_id=activity_id)
+
+    @classmethod
+    def get_all_images(cls):
+        return cls.query.all()
 
 
 def connect_to_db(flask_app, db_uri=os.environ["POSTGRES_URI"]):

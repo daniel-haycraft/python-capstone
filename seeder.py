@@ -19,8 +19,9 @@ with server.app.app_context():
         
         for n in range(12):
                 email=f'test{n}@test.com'
+                username = f'user{n}'
                 password= 'test'
-                new_user = model.User.create_user(email, password)
+                new_user = model.User.create_user(email, username, password)
                 model.db.session.add(new_user)
 
         with open('data/activity.json') as f:
@@ -37,7 +38,6 @@ with server.app.app_context():
                                 act['cost'],
                                 act['user_id']
                         )
-                        
                                 # maybe use an iterable?
                         db_act = model.Activity.create_activity(kind, tools, cost, user_id)
                         act_in_db.append(db_act)
@@ -58,7 +58,6 @@ with server.app.app_context():
                         db_img = model.Image.create_image(image_path, location, weather, user_id, activity_id)
                         img_in_db.append(db_img)
                         model.db.session.add_all(img_in_db)
-        
                         model.db.session.commit()
 
         

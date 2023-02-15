@@ -1,0 +1,26 @@
+{%extends 'base.html'%}
+
+{%block body%}
+{%for img in images%}
+<section>
+    <div>
+        <ul>{{img.user.username}}</ul>
+
+        image url and tag :){{img.image_path}}
+
+        <li>{{img.activity.tools}}</li>
+
+        <li>{{img.activity.kind}}</li>
+
+        
+        <li>{{img.location}}</li>
+
+       <li>{{img.weather}}</li>
+
+        <li>{{img.activity.cost}}</li>
+
+        
+    </div>
+</section>
+{%endfor%}
+{%endblock%}

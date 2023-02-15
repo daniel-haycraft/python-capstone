@@ -22,17 +22,18 @@ def home():
 def register():
     register = RegisterForm()
     email=register.email.data
+    username = register.username.data
     password = register.password.data
     double_password = register.double_password.data
 
     ## check users check db if email exists
     if register.validate_on_submit():
-        if User.check_users(email):
-            return redirect('/register'), flash('email already exists')
+        if User.check_users(email, username):
+            return redirect('/register'), flash('email or username already exists')
         if password != double_password:
             return flash('passwords do not match')
         else:
-            nu = User.create_user(email, password)
+            nu = User.create_user(email, username,password)
             db.session.add(nu)
             db.session.commit()
             flash(f'registered! {register.email.data} successfully')
@@ -50,7 +51,7 @@ def login():
         email = form.email.data
         password = form.password.data
 
-        user = User.check_users(email)
+        user = User.query.filter_by(email = email).first()
         if user:
             if user.password == password:
                 login_user(user)
@@ -58,6 +59,13 @@ def login():
         return 'wrong password or email'
     else:
         return render_template('login.html', form=form)
+
+@app.route('/posts')
+def posts():
+    images = Image.get_all_images()
+    return render_template('posts.html', images = images)
+    
+
 
 
 
