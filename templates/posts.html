@@ -4,9 +4,9 @@
 {%for img in images%}
 <section>
     <div>
-        <ul>{{img.user.username}}</ul>
+        <ul><h1>{{img.user.username}}</h1></ul>
 
-        image url and tag :){{img.image_path}}
+        <img src="{{ img.image_path }}" alt="ig" style="height: auto; width: 500px;">
 
         <li>{{img.activity.tools}}</li>
 

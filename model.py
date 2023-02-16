@@ -60,8 +60,10 @@ class Activity(db.Model):
     def __repr__(self):
         return f'<activity_id={self.activity_id} kind={self.kind}>'
 
+    @classmethod
+    def split_tools(cls, tools):
+        return tools.split(',')
             # create method for tools so they already come out as "commas"
-
     @classmethod
     def create_activity(cls, kind, tools, cost, user):
         return cls(kind=kind, tools=tools, cost=cost, user_id = user)

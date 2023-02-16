@@ -34,7 +34,6 @@
             "Canoe",
             "Camelpack",
             "Helmet"
-
         ],
         "cost": 100,
         "user_id": 4
@@ -54,7 +53,6 @@
             "Boat",
             "Life Jacket",
             "Water Skis"
-
         ],
         "cost": 150,
         "user_id": 6
@@ -70,7 +68,7 @@
         "user_id": 7
     },
     {
-        "kind": "moutain biking",
+        "kind": "Moutain Biking",
         "tools": [
             "Moutain Bike",
             "Camelpack",

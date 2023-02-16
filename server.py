@@ -2,6 +2,8 @@ from flask import Flask, render_template, session, url_for, redirect, flash, ses
 from flask_login import LoginManager, current_user, login_user, logout_user, login_required
 from datetime import timedelta
 
+import json
+
 from model import connect_to_db, User, UserMixin, Image, Activity, db
 from forms import RegisterForm, UserForm
 from jinja2 import StrictUndefined
@@ -63,6 +65,8 @@ def login():
 @app.route('/posts')
 def posts():
     images = Image.get_all_images()
+    for i in images:
+        print(type(i.activity.tools))
     return render_template('posts.html', images = images)
     
 
