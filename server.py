@@ -1,19 +1,30 @@
 from flask import Flask, render_template, session, url_for, redirect, flash, session, request
 from flask_login import LoginManager, current_user, login_user, logout_user, login_required
 from datetime import timedelta
-
 import json
 
-from model import connect_to_db, User, UserMixin, Image, Activity, db
-from forms import RegisterForm, UserForm
+from model import connect_to_db, User, UserMixin, Image, Activity, db, Tool
+from forms import RegisterForm, UserForm, CreatePost
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
+
 app.secret_key = 'dev'
+
+import cloudinary
+
+cloudinary.config(
+  cloud_name = "dnmkry9p0",
+  api_key = "312126661549849",
+  api_secret = "epqOkNeGIfv4M4j5pQ_rpKAnxf4",
+  secure = True
+)
+
+from cloudinary.uploader import upload
+from cloudinary.utils import cloudinary_url
 
 login_manager = LoginManager()
 login_manager.init_app(app)
-
 app.jinja_env.undefined = StrictUndefined
 
 @app.route('/')
@@ -27,16 +38,14 @@ def register():
     username = register.username.data
     password = register.password.data
     double_password = register.double_password.data
-
-    ## check users check db if email exists
     if register.validate_on_submit():
         if User.check_users(email, username):
             return redirect('/register'), flash('email or username already exists')
         if password != double_password:
             return flash('passwords do not match')
         else:
-            nu = User.create_user(email, username,password)
-            db.session.add(nu)
+            new_user = User.create_user(email, username,password)
+            db.session.add(new_user)
             db.session.commit()
             flash(f'registered! {register.email.data} successfully')
             return redirect(url_for('login'))
@@ -45,33 +54,71 @@ def register():
 @login_manager.user_loader
 def load_user(user_id):
     return User.get_user_id(user_id)
-    
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = UserForm()
     if form.validate_on_submit():
         email = form.email.data
         password = form.password.data
-
         user = User.query.filter_by(email = email).first()
         if user:
-            if user.password == password:
+            if user.check_password(password):
                 login_user(user)
                 return redirect(url_for('home'))
         return 'wrong password or email'
-    else:
-        return render_template('login.html', form=form)
+    return render_template('login.html', form=form)
 
-@app.route('/posts')
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for("home"))
+
+@app.route('/posts/<user_id>', methods=['GET','POST'])
+def post_details(user_id):
+    user = User.get_user_id(user_id)
+    images = Image.query.filter_by(user_id = user.id).all()
+    return render_template('post_details.html', imagess= images)
+
+@app.route('/delete')   
+def delete_post():
+    images = Image.query.filter_by(user_id = current_user.id).first()
+    db.session.delete(images)
+    db.session.commit()
+    return redirect(url_for('home'))
+
+@app.route('/posts', methods = ['GET', 'POST'])
 def posts():
     images = Image.get_all_images()
-    for i in images:
-        print(type(i.activity.tools))
     return render_template('posts.html', images = images)
-    
 
 
-
+@app.route('/upload', methods=['GET', 'POST'])
+def upload():
+    post = CreatePost()
+    activity = post.activity.data
+    location = post.location.data
+    weather = post.weather.data
+    equipment = post.equipment.data
+    cost = post.cost.data
+    if request.method == 'POST':
+        image_file = request.files.get('image')
+        if image_file is not None:
+            upload_result = cloudinary.uploader.upload(image_file, folder='capstone', format='png')
+            image_url = upload_result['secure_url']
+            new_activity = Activity.create_activity(activity, cost, current_user.id)
+            db.session.add(new_activity)
+            db.session.commit()
+            db.session.refresh(new_activity)
+            new_tool = Tool.create_tool(equipment, new_activity.activity_id)
+            new_image = Image.create_image(image_url, location, weather, current_user.id, new_activity.activity_id)
+            db.session.add(new_tool)
+            db.session.add(new_image)
+            db.session.commit()
+            return redirect(url_for("posts")), flash('uploaded!')
+        else:
+            flash('something went wrong')
+    return render_template('upload.html', post=post)
 
 if __name__ == "__main__":
     connect_to_db(app)

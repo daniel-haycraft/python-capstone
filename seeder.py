@@ -24,25 +24,32 @@ with server.app.app_context():
                 new_user = model.User.create_user(email, username, password)
                 model.db.session.add(new_user)
 
+
         with open('data/activity.json') as f:
                 act_data = json.loads(f.read())
                 act_in_db =  []
                 for act in act_data: 
-                        kind, tools, cost, user_id=(
+                        kind, cost, user_id=(
                                 act['kind'],
-                                # act['tools'] is something i may need to worry about.
-                                # i think i can do in in jinja 
-                                # because that would 
-                                # make lots of sense
-                                act['tools'],
                                 act['cost'],
-                                act['user_id']
+                                act['user_id'],
                         )
                                 # maybe use an iterable?
-                        db_act = model.Activity.create_activity(kind, tools, cost, user_id)
+                        db_act = model.Activity.create_activity(kind, cost, user_id)
                         act_in_db.append(db_act)
                         model.db.session.add_all(act_in_db)
 
+        with open('data/tools.json') as f:
+                tool_data = json.loads(f.read())
+                tool_in_db = []
+                for t in tool_data:
+                        name, activity_id=(
+                                t['name'],
+                                t['activity_id']
+                        )
+                        db_tool = model.Tool.create_tool(name, activity_id)
+                        tool_in_db.append(db_tool)
+                        model.db.session.add_all(tool_in_db)
 
         with open('data/images.json') as f:
                 img_data = json.loads(f.read())
@@ -59,5 +66,7 @@ with server.app.app_context():
                         img_in_db.append(db_img)
                         model.db.session.add_all(img_in_db)
                         model.db.session.commit()
+        
+        
 
         

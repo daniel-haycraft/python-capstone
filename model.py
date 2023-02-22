@@ -6,6 +6,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 
+
+
 class User(db.Model, UserMixin):
     
     __tablename__ = "users"
@@ -50,23 +52,20 @@ class Activity(db.Model):
 
     activity_id = db.Column(db.Integer, autoincrement=True, primary_key = True)
     kind = db.Column(db.String)
-    tools = db.Column(db.String)
     cost = db.Column(db.Integer)
+
 
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
 
     user = db.relationship("User", backref="activities")
+    tool = db.relationship("Tool", backref="activities", uselist=False)
 
     def __repr__(self):
         return f'<activity_id={self.activity_id} kind={self.kind}>'
 
     @classmethod
-    def split_tools(cls, tools):
-        return tools.split(',')
-            # create method for tools so they already come out as "commas"
-    @classmethod
-    def create_activity(cls, kind, tools, cost, user):
-        return cls(kind=kind, tools=tools, cost=cost, user_id = user)
+    def create_activity(cls, kind, cost, user_id):
+        return cls(kind=kind, cost=cost, user_id = user_id)
     
     @classmethod
     def get_all_activities(cls):
@@ -98,6 +97,25 @@ class Image(db.Model):
     def get_all_images(cls):
         return cls.query.all()
 
+
+class Tool(db.Model):
+    __tablename__ = "tools"
+
+    tool_id = db.Column(db.Integer, autoincrement=True, primary_key = True)
+    name = db.Column(db.Text)
+
+    activity_id = db.Column(db.Integer, db.ForeignKey("activities.activity_id"))
+
+    def __repr__(self):
+        return f'<tool_id={self.tool_id} name={self.name}>'
+
+    @classmethod
+    def create_tool(cls, name, activity_id):
+        return cls(name = name, activity_id = activity_id)
+        
+    @classmethod
+    def get_all_tools(cls):
+        return cls.query.all()
 
 def connect_to_db(flask_app, db_uri=os.environ["POSTGRES_URI"]):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri

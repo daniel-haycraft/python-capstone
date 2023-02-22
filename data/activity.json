@@ -1,80 +1,50 @@
 [
     {
         "kind": "Kayaking",
-        "tools": [
-            "Kayak",
-            "Helmet",
-            "Straps"
-        ],
         "cost": 100,
-        "user_id": 1
+        "user_id": 1,
+        "tool_id": 1
     },
     {
         "kind": "Off Roading",
-        "tools": [
-            "AT Tires",
-            "Rescue Belt"
-        ],
         "cost": 50,
-        "user_id": 2
+        "user_id": 2,
+        "tool_id": 2
     },
     {
         "kind": "Hiking",
-        "tools": [
-            "Swim Suit",
-            "Water",
-            "Snacks"
-        ],
         "cost": 50,
-        "user_id": 3
+        "user_id": 3,
+        "tool_id": 3
     },
     {
         "kind": "Canoing",
-        "tools": [
-            "Canoe",
-            "Camelpack",
-            "Helmet"
-        ],
         "cost": 100,
-        "user_id": 4
+        "user_id": 4,
+        "tool_id": 4
     },
     {
         "kind": "Fishing",
-        "tools": [
-            "Fishing Pools",
-            "Fishing Bait"
-        ],
         "cost": 60,
-        "user_id": 5
+        "user_id": 5,
+        "tool_id": 5
     },
     {
         "kind": "Water Ski",
-        "tools": [
-            "Boat",
-            "Life Jacket",
-            "Water Skis"
-        ],
         "cost": 150,
-        "user_id": 6
+        "user_id": 6,
+        "tool_id": 6
     },
     {
         "kind": "Camping",
-        "tools": [
-            "Food",
-            "Water",
-            "Shelter"
-        ],
         "cost": 100,
-        "user_id": 7
+        "user_id": 7,
+        "tool_id": 7
     },
     {
         "kind": "Moutain Biking",
-        "tools": [
-            "Moutain Bike",
-            "Camelpack",
-            "Helmet"
-        ],
         "cost": 100,
-        "user_id": 8
+        "user_id": 8,
+        "tool_id": 8
     }
 ]

@@ -3,9 +3,8 @@
 {%block body%}
 {%for img in images%}
 <section>
-    <div>
-        
-        <a href="/posts/{{ img.activity.user_id }}"><ul><h1>{{img.user.username}}</h1></ul></a>
+    <div >
+        {{img.user.username}}
            
         <img src="{{ img.image_path }}" alt="ig" style="height: auto; width: 500px;">
 
@@ -21,10 +20,7 @@
             <ul><h4>Suggested Equipment List:</h4></ul>
             <p>{{img.activity.tool.name}}</p>
 
-            
-        
-        
         </div>
-    </section>
-    {%endfor%}
+</section>
+{%endfor%}
 {%endblock%}

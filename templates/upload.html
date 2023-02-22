@@ -1,0 +1,19 @@
+{%extends 'base.html'%}
+
+{%block body%}
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <label for="image">Select an image to upload:</label>
+    <input type="file" id="image" name="image" accept="image/*">
+    {{post.csrf_token()}}
+    activity
+    {{post.activity}}
+    weather
+    {{post.weather}}
+    equipment
+    {{post.equipment}}
+    cost
+    {{post.cost}}
+    {{post.submit(value="Upload")}}
+  </form>
+
+{%endblock%}

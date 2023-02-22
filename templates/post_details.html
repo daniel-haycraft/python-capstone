@@ -1,0 +1,24 @@
+{%extends 'base.html'%}
+
+{%block body %}
+{%for images in imagess%}
+<section>
+    <div>
+        <ul><h1>{{images.user.username}}</h1></ul>
+        <a ></a>
+        <img src="{{ images.image_path }}" alt="ig" style="height: auto; width: 500px;">
+        <button><a href="{{url_for('delete_post')}} " method="DELETE"> Delete </a></button>
+        <h3>Activity</h3>
+        <li>{{images.activity.kind}}</li>
+        <h3>Location</h3>
+        <li>{{images.location}}</li>
+        <h3>Weather</h3>
+        <li>{{images.weather}}</li>
+        <h3>Suggested Equipment List:</h3>
+        <p>{{images.activity.tool.name}}</p>
+        <h3>Cost</h3>
+        <li>${{images.activity.cost}}</li>
+    </div>
+</section>
+{%endfor%}
+{%endblock%}
