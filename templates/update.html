@@ -1,7 +1,7 @@
-{%extends 'base.html'%}
+{%extends 'upload.html'%}
 
 {%block body%}
-<form action="/upload" method="post" enctype="multipart/form-data">
+<form action="/update/{{image.image_id}}" method="POST" enctype="multipart/form-data">
     <label for="image">Select an image to upload:</label>
     <input type="file" id="image" name="image" accept="image/*">
     {{post.csrf_token()}}
@@ -17,5 +17,4 @@
     {{post.cost}}
     {{post.submit(value="Upload")}}
   </form>
-
 {%endblock%}
