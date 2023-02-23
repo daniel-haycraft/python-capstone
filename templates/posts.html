@@ -4,26 +4,12 @@
 {%for img in images%}
 <section>
     <div>
-        
         <a href="/posts/{{ img.activity.user_id }}"><ul><h1>{{img.user.username}}</h1></ul></a>
-           
         <img src="{{ img.image_path }}" alt="ig" style="height: auto; width: 500px;">
-
             <h3>Activity</h3>
             <li>{{img.activity.kind}}</li>
-            <h3>Location</h3>
+            <h3>Location</h3  
             <li>{{img.location}}</li>
-            <h3>Weather</h3>
-            <li>{{img.weather}}</li>
-            <h3>Cost</h3>
-            <li>{{img.activity.cost}}</li>
-
-            <ul><h4>Suggested Equipment List:</h4></ul>
-            <p>{{img.activity.tool.name}}</p>
-
-            
-        
-        
         </div>
     </section>
     {%endfor%}

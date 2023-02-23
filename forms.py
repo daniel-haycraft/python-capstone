@@ -22,6 +22,7 @@ class CreatePost(FlaskForm):
     weather = StringField("What was the weather like?", validators=[DataRequired()])
     equipment = StringField("equipment used?", validators=[DataRequired()])
     cost = StringField("how much did it cost", validators=[DataRequired()])
+    comment = TextAreaField("Comment what you did!", validators=[DataRequired()])
     submit = SubmitField("Submit")
 
 class Comments(FlaskForm):

@@ -54,7 +54,6 @@ class Activity(db.Model):
     kind = db.Column(db.String)
     cost = db.Column(db.Integer)
 
-
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
 
     user = db.relationship("User", backref="activities")
@@ -83,8 +82,10 @@ class Image(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     activity_id = db.Column(db.Integer, db.ForeignKey("activities.activity_id"))
 
+
     activity = db.relationship("Activity", backref="images")
     user = db.relationship("User", backref="images")
+    comment = db.relationship("Comment", backref="images", uselist=False)
 
     def __repr__(self):
         return f'<image_id={self.image_id} name={self.image_path}>'
@@ -116,6 +117,23 @@ class Tool(db.Model):
     @classmethod
     def get_all_tools(cls):
         return cls.query.all()
+
+class Comment(db.Model):
+    __tablename__ = 'comments'
+
+    comment_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    comment = db.Column(db.Text)
+
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    image_id = db.Column(db.Integer, db.ForeignKey("images.image_id"))
+
+    def __repr__(self):
+        return f'<comment_id ={self.comment_id} name={self.comment}>'
+    
+    @classmethod
+    def create_comment(cls, comment, user_id, image_id):
+        return cls(comment = comment, user_id= user_id, image_id = image_id)
+
 
 def connect_to_db(flask_app, db_uri=os.environ["POSTGRES_URI"]):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri

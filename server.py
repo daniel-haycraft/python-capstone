@@ -3,7 +3,7 @@ from flask_login import LoginManager, current_user, login_user, logout_user, log
 from datetime import timedelta
 import json
 
-from model import connect_to_db, User, UserMixin, Image, Activity, db, Tool
+from model import connect_to_db, User, UserMixin, Image, Activity, db, Tool, Comment
 from forms import RegisterForm, UserForm, CreatePost
 from jinja2 import StrictUndefined
 
@@ -40,9 +40,10 @@ def register():
     double_password = register.double_password.data
     if register.validate_on_submit():
         if User.check_users(email, username):
-            return redirect('/register'), flash('email or username already exists')
+            return redirect('/register')
         if password != double_password:
-            return flash('passwords do not match')
+             flash('passwords do not match')
+             return redirect('/register')
         else:
             new_user = User.create_user(email, username,password)
             db.session.add(new_user)
@@ -88,9 +89,9 @@ def posts():
 def post_details(user_id):
     user = User.get_user_id(user_id)
     images = Image.query.filter_by(user_id = user.id).all()
-    return render_template('post_details.html', imagess= images)
+    return render_template('post_details.html', imagess= images, current_user=current_user, user= user)
 
-@app.route('/delete/<image_id>', methods=['GET','POST', ])   
+@app.route('/delete/<image_id>', methods=['GET','POST' ])   
 def delete_post(image_id):
     img_id = Image.query.filter_by(image_id = image_id).first()
     activity_id = img_id.activity.activity_id
@@ -99,7 +100,7 @@ def delete_post(image_id):
     db.session.delete(img_id)
     db.session.delete(tool)
     db.session.commit()
-    return redirect(url_for('home'))
+    return redirect(url_for('posts'))
 
 @app.route('/update/<image_id>', methods=['GET', 'POST'])
 def update(image_id):
@@ -136,6 +137,7 @@ def upload():
     weather = post.weather.data
     equipment = post.equipment.data
     cost = post.cost.data
+    comment = post.comment.data
     if request.method == 'POST':
         image_file = request.files.get('image')
         if image_file is not None:
@@ -147,14 +149,25 @@ def upload():
             db.session.refresh(new_activity)
             new_tool = Tool.create_tool(equipment, new_activity.activity_id)
             new_image = Image.create_image(image_url, location, weather, current_user.id, new_activity.activity_id)
-            db.session.add(new_tool)
             db.session.add(new_image)
+            db.session.commit()
+            db.session.refresh(new_image)
+            # .refresh allows me to interact with the newly made image and or activity i need both the image_id and activity_id
+            new_comment = Comment.create_comment(comment, current_user.id, new_image.image_id)
+            db.session.add(new_comment)
+            db.session.add(new_tool)
+
             db.session.commit()
             return redirect(url_for("posts")), flash('uploaded!')
         else:
             flash('something went wrong')
     return render_template('upload.html', post=post)
 
+@app.errorhandler(404)
+def error(e):
+   return render_template('error.html')
+
+
 if __name__ == "__main__":
     connect_to_db(app)
-    app.run(host="localhost", port =3001, debug=True)
+    app.run(host="localhost", port =3001)

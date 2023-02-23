@@ -39,6 +39,8 @@ with server.app.app_context():
                         act_in_db.append(db_act)
                         model.db.session.add_all(act_in_db)
 
+        
+
         with open('data/tools.json') as f:
                 tool_data = json.loads(f.read())
                 tool_in_db = []
@@ -65,7 +67,21 @@ with server.app.app_context():
                         db_img = model.Image.create_image(image_path, location, weather, user_id, activity_id)
                         img_in_db.append(db_img)
                         model.db.session.add_all(img_in_db)
-                        model.db.session.commit()
+
+                with open('data/comments.json') as f:
+                        comment_data = json.loads(f.read())
+                        comment_in_db = []
+                        for t in comment_data:
+                                comment, user_id, image_id=(
+                                        t['comment'],
+                                        t['user_id'],
+                                        t['image_id'],
+                                )
+                                db_comment = model.Comment.create_comment(comment, user_id, image_id)
+                                comment_in_db.append(db_comment)
+                                model.db.session.add_all(comment_in_db)
+                        
+                                model.db.session.commit()
         
         
 

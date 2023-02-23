@@ -6,11 +6,16 @@
     {{register.csrf_token()}}
     {{register.email}}
     <br>
+    <h6> username</h6>
+    <br>
+    {{register.username}}
+    <br>
     <h6>Password</h6>
     {{register.password(type='password')}}
     <br>
     <h6>Password</h6>
     {{register.double_password(type='password')}}
     {{register.submit}}
+  
 </form>
 {%endblock%}

@@ -1,0 +1,22 @@
+[
+    {
+    "comment":"Great Trip With The Family!",
+    "user_id": 1,
+    "image_id": 1
+    },
+    {
+    "comment":"Lots of desert racing strips",
+    "user_id": 2,
+    "image_id": 2
+    },
+    {
+    "comment":"Hiking in dry weather today, sorry notherners",
+    "user_id": 3,
+    "image_id": 3
+    },
+    {
+    "comment":"Finally put this canoe to good use!",
+    "user_id": 4,
+    "image_id": 4
+    }
+]

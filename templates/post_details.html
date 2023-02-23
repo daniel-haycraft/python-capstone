@@ -7,10 +7,19 @@
         <ul><h1>{{images.user.username}}</h1></ul>
         <a ></a>
         <img src="{{ images.image_path }}" alt="ig" style="height: auto; width: 500px;">
+        {% if current_user == user%}
         <button><a href="{{url_for('delete_post', image_id = images.image_id)}} "> Delete </a></button>
         <button><a href="{{url_for('update', image_id = images.image_id)}}" > Update </a></button>
+        {%else%}
+        
+        {%endif %}
         <h3>Activity</h3>
         <li>{{images.activity.kind}}</li>
+        {%if images.comment %}
+        <p>{{images.comment.comment}}</p>
+        {%else%}
+        <p></p>
+        {%endif%}
         <h3>Location</h3>
         <li>{{images.location}}</li>
         <h3>Weather</h3>
