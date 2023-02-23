@@ -13,11 +13,12 @@ app.secret_key = 'dev'
 
 import cloudinary
 
+
 cloudinary.config(
-  cloud_name = "dnmkry9p0",
-  api_key = "312126661549849",
-  api_secret = "epqOkNeGIfv4M4j5pQ_rpKAnxf4",
-  secure = True
+    cloud_name=os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    api_key=os.environ.get('CLOUDINARY_API_KEY'),
+    api_secret=os.environ.get('CLOUDINARY_API_SECRET'),
+    secure= True
 )
 
 from cloudinary.uploader import upload
