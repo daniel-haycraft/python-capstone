@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, session, url_for, redirect, flash, session, request
 from flask_login import LoginManager, current_user, login_user, logout_user, login_required
 from datetime import timedelta
@@ -15,9 +16,9 @@ import cloudinary
 
 
 cloudinary.config(
-    cloud_name=os.environ.get('CLOUDINARY_CLOUD_NAME'),
-    api_key=os.environ.get('CLOUDINARY_API_KEY'),
-    api_secret=os.environ.get('CLOUDINARY_API_SECRET'),
+    cloud_name=os.environ['CLOUDINARY_CLOUD_NAME'],
+    api_key=os.environ['CLOUDINARY_API_KEY'],
+    api_secret=os.environ['CLOUDINARY_API_SECRET'],
     secure= True
 )
 
@@ -114,6 +115,7 @@ def update(image_id):
     weather = post.weather.data
     equipment = post.equipment.data
     cost = post.cost.data
+    comment = post.comment.data
     image_file = request.files.get('image')
     if request.method == 'POST':
         if image_file is not None:
@@ -125,6 +127,7 @@ def update(image_id):
         image.weather = weather
         image.activity.cost = cost
         image.activity.tool.name = equipment
+        image.comment.comment = comment
         db.session.commit()
         return redirect(url_for('home'))
     else:

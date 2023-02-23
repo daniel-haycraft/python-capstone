@@ -3,13 +3,9 @@ import json
 from random import choice, randint
 from datetime import datetime
 
-
-
 import model
 import server
 
-
-        
 with server.app.app_context():
         os.system('dropdb capstone')
         os.system('createdb capstone')
@@ -24,7 +20,6 @@ with server.app.app_context():
                 new_user = model.User.create_user(email, username, password)
                 model.db.session.add(new_user)
 
-
         with open('data/activity.json') as f:
                 act_data = json.loads(f.read())
                 act_in_db =  []
@@ -38,8 +33,6 @@ with server.app.app_context():
                         db_act = model.Activity.create_activity(kind, cost, user_id)
                         act_in_db.append(db_act)
                         model.db.session.add_all(act_in_db)
-
-        
 
         with open('data/tools.json') as f:
                 tool_data = json.loads(f.read())
@@ -82,7 +75,3 @@ with server.app.app_context():
                                 model.db.session.add_all(comment_in_db)
                         
                                 model.db.session.commit()
-        
-        
-
-        
