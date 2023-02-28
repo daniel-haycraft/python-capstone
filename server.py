@@ -14,7 +14,6 @@ app.secret_key = 'dev'
 
 import cloudinary
 
-
 cloudinary.config(
     cloud_name=os.environ['CLOUDINARY_CLOUD_NAME'],
     api_key=os.environ['CLOUDINARY_API_KEY'],
@@ -31,7 +30,7 @@ app.jinja_env.undefined = StrictUndefined
 
 @app.route('/')
 def home():
-    return render_template('base.html')
+    return render_template('base.html', current_user= current_user)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -76,28 +75,32 @@ def login():
     return render_template('login.html', form=form)
 
 @app.route("/logout")
+@login_required
 def logout():
     """loging out a current user"""
     logout_user()
     return redirect(url_for("home"))
 
-@app.route('/posts', methods = ['GET', 'POST'])
+@app.route('/posts', methods = ['GET'])
+@login_required
 def posts():
     """using get_all_images from my class method aka(cls) in my db.Image model"""
     images = Image.get_all_images()
     return render_template('posts.html', images = images)
 
-@app.route('/posts/<user_id>', methods=['GET','POST'])
+@app.route('/posts/<user_id>', methods=['GET'])
+@login_required
 def post_details(user_id):
     user = User.get_user_id(user_id)
     images = Image.query.filter_by(user_id = user.id).all()
     return render_template('post_details.html', imagess= images, current_user=current_user, user= user)
 
 @app.route('/delete/<image_id>', methods=['GET','POST' ])   
+@login_required
 def delete_post(image_id):
     img_id = Image.query.filter_by(image_id = image_id).first()
-    activity_id = img_id.activity.activity_id
     tool = Tool.query.filter_by(activity_id= img_id.activity.tool.tool_id).first()
+    db.session.delete(img_id.comment)
     db.session.delete(img_id.activity)
     db.session.delete(img_id)
     db.session.delete(tool)
@@ -105,6 +108,7 @@ def delete_post(image_id):
     return redirect(url_for('posts'))
 
 @app.route('/update/<image_id>', methods=['GET', 'POST'])
+@login_required
 def update(image_id):
     image = Image.query.filter_by(image_id = image_id).first()
     if not image:
@@ -116,12 +120,7 @@ def update(image_id):
     equipment = post.equipment.data
     cost = post.cost.data
     comment = post.comment.data
-    image_file = request.files.get('image')
     if request.method == 'POST':
-        if image_file is not None:
-            upload_result = cloudinary.uploader.upload(image_file, folder='capstone', format='png')
-            image_url = upload_result['secure_url']
-            image.image_path= image_url
         image.activity.kind = kind
         image.location = location
         image.weather = weather
@@ -129,11 +128,13 @@ def update(image_id):
         image.activity.tool.name = equipment
         image.comment.comment = comment
         db.session.commit()
-        return redirect(url_for('home'))
+        flash('updated!')
+        return redirect(url_for('posts'))
     else:
         return render_template('update.html', post=post, image = image)
 
 @app.route('/upload', methods=['GET', 'POST'])
+@login_required
 def upload():
     post = CreatePost()
     activity = post.activity.data
@@ -160,7 +161,6 @@ def upload():
             new_comment = Comment.create_comment(comment, current_user.id, new_image.image_id)
             db.session.add(new_comment)
             db.session.add(new_tool)
-
             db.session.commit()
             return redirect(url_for("posts")), flash('uploaded!')
         else:
@@ -171,6 +171,9 @@ def upload():
 def error(e):
    return render_template('error.html')
 
+@app.errorhandler(401)
+def error(e):
+   return render_template('error.html')
 
 if __name__ == "__main__":
     connect_to_db(app)

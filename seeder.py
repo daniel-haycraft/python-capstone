@@ -13,7 +13,7 @@ with server.app.app_context():
         model.connect_to_db(server.app)
         model.db.create_all()
         
-        for n in range(12):
+        for n in range(1,5):
                 email=f'test{n}@test.com'
                 username = f'user{n}'
                 password= 'test'

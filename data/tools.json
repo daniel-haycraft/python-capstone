@@ -14,21 +14,5 @@
     {
         "name": "Trailer",
         "activity_id":4
-    },
-    {
-        "name": "Fishing Pools",
-        "activity_id":5
-    },
-    {
-        "name": "Life Jacket",
-        "activity_id":6
-    },
-    {
-        "name": "Tent",
-        "activity_id":7
-    },
-    {
-        "name": "Helmet",
-        "activity_id":8
     }
 ]

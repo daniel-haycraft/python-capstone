@@ -4,18 +4,67 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<link rel="stylesheet" href="/static/styles.css">
     <title>TBD</title>
 </head>
-<body>
-{%block body%}
+<nav class="navbar navbar-dark bg-primary navbar-expand-lg">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse justify-content-md-center">
+            <ul class="navbar-nav">
+            <a id ='a-link' class="navbar-brand" href="/">HOME</a>
+            {%  if current_user.is_authenticated %}
+            <a id ='a-link' class="nav-item nav-link active" href="/logout">Logout</a>
+            {%else%}
+            <a id ='a-link' class="nav-item nav-link active" href="/login">Login</a>
+            <a id ='a-link' class="nav-item nav-link active" href="/register">Register</a>
+            {%endif%}
+            <a id='a-link' class="nav-item nav-link active" href="/posts" >Posts</a>
+            <a id='a-link' class="nav-item nav-link active" href="/upload" >Upload</a>
+          </ul>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cloud-drizzle-fill" viewBox="0 0 16 16">
+            <path d="M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm-3.5 1.5a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 1 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm.747-8.498a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973z"/>
+          </svg>
+        </div>
+    </div>
+      </nav>
+
+
+<body style="color: floralwhite; background-color: #1a1a1a;">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              X </button>
+        </div>
+    {%endfor%}
+
+
+    
+{%block content%}
+
+<body id="i">
+    
+</body>
 
 {%endblock%}
 
-{% for message in get_flashed_messages() %}
-    <div class="alert alert-success" role="alert">
-        {{message}}
+
+{%block body%}
+
+    <div class="home-page">
+        <h1>Connect and get inspired by fellow adventurers</h1>
+        <p>
+            Share your stories, and connect with other adventurers from around the world. 
+            <br>
+            Join our community and discover the secret oases of the world
+        </p>
     </div>
-{%endfor%}
+
+{%endblock%}
+
 </body>
 </html>

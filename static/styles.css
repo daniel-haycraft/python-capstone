@@ -1,0 +1,51 @@
+/* Dark mode styles */
+.custom-file-upload {
+    display: inline-block;
+    padding: 16px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #5c5656;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .custom-file-upload:hover {
+    background-color: #3e8e41;
+  }
+
+.button {
+        background-color: gold;
+        border: none;
+        color: black;
+        padding: 10px 20px;
+        text-align: center;
+        display: inline-block;
+        font-size: 20px;
+        border-radius: 4px;
+        cursor: default;
+      }
+      
+#a-link{
+    color: black;
+    font-weight: bold;
+}
+
+#a-link:hover{
+    color: rgb(66, 65, 65);
+    font-weight: bold;
+}
+.home-page{
+    text-align: center;
+    justify-content: center;
+    font-size: larger;
+}
+
+#i {
+    background-image: url(https://images.unsplash.com/photo-1664466935816-4cf27816333e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2071&q=80);
+    background-repeat: no-repeat;
+ 
+  background-size: cover;
+  background-attachment: fixed;
+  image-rendering: optimizeQuality;
+}

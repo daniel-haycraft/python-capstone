@@ -31,42 +31,5 @@
         "user_id": 4,
         "activity_id": 4
         
-    },
-
-    {
-        
-        "image_path": "https://cdn.pixabay.com/photo/2018/01/09/16/11/angler-3071970__480.jpg",
-        "location": "Roosevelt, Az",
-        "weather": "Cloudy and windy",
-        "user_id": 5,
-        "activity_id": 5
-        
-    },
-    {
-        
-        "image_path": "https://cdn.pixabay.com/photo/2022/10/22/14/02/water-scooter-7539309__480.jpg",
-        "location": "Canyon Lake",
-        "weather": "Cloudy",
-        "user_id": 6,
-        "activity_id": 6
-        
-    },
-    {
-        
-        "image_path": "https://cdn.pixabay.com/photo/2016/11/22/23/08/adventure-1851092__480.jpg",
-        "location": "Nothern Rim, Payson",
-        "weather": "Cloudy",
-        "user_id": 7,
-        "activity_id": 7
-        
-    },
-    {
-        
-        "image_path": "https://cdn.pixabay.com/photo/2013/08/24/08/35/mountain-bike-175216__480.jpg",
-        "location": "Somewhere with dirt and rocky terrain",
-        "weather": "Cloudy",
-        "user_id": 8,
-        "activity_id": 8
-        
     }
 ]

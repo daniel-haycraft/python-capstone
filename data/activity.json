@@ -22,29 +22,5 @@
         "cost": 100,
         "user_id": 4,
         "tool_id": 4
-    },
-    {
-        "kind": "Fishing",
-        "cost": 60,
-        "user_id": 5,
-        "tool_id": 5
-    },
-    {
-        "kind": "Water Ski",
-        "cost": 150,
-        "user_id": 6,
-        "tool_id": 6
-    },
-    {
-        "kind": "Camping",
-        "cost": 100,
-        "user_id": 7,
-        "tool_id": 7
-    },
-    {
-        "kind": "Moutain Biking",
-        "cost": 100,
-        "user_id": 8,
-        "tool_id": 8
     }
 ]

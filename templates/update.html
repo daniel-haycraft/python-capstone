@@ -1,21 +1,29 @@
-{%extends 'upload.html'%}
+{%extends 'base.html'%}
 
 {%block body%}
 <form action="/update/{{image.image_id}}" method="POST" enctype="multipart/form-data">
-    <label for="image">Select an image to upload:</label>
-    <input type="file" id="image" name="image" accept="image/*">
-    {{post.csrf_token()}}
-    activity
-    {{post.activity}}
-    location
-    {{post.location}}
-    weather
-    {{post.weather}}
-    equipment
-    {{post.equipment}}
-    cost
-    {{post.cost}}
-    {{post.comment}}
-    {{post.submit(value="Upload")}}
+  <section class="d-flex justify-content-center" style="padding-top: 200px;">
+    <div class="form-row" >
+      {{post.csrf_token()}}
+      <div class="form-group col-md-10">
+      <label for="update" class="custom-file-upload">
+    {{post.activity(class="form-control", placeholder="Activity")}}
+    <br>
+    {{post.location(class="form-control", placeholder="Location")}}
+    <br>
+    {{post.weather(class="form-control", placeholder="Weather")}}
+    <br>
+    {{post.equipment(class="form-control", placeholder="Equipment")}}
+    <br>
+    {{post.cost(class="form-control", placeholder="Cost")}}
+    <br>
+    {{post.comment(class="form-control", placeholder="Comment")}}
+    <br>
+    {{post.submit(class='button')}}
+    <br>
+  </label>
+  </div>
+  </div>
   </form>
+</section>
 {%endblock%}

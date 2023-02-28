@@ -2,21 +2,47 @@
 
 {%block body%}
 <form action="/upload" method="post" enctype="multipart/form-data">
-    <label for="image">Select an image to upload:</label>
-    <input type="file" id="image" name="image" accept="image/*">
+  <section class="d-flex justify-content-center" style="padding-top: 200px;">
+    <div class="form-row" >
+    <div class="form-group col-md-10">
+      <label for="image" class="custom-file-upload">
+        <i class="fas fa-cloud-upload-alt"></i> Upload Image   
+        <input  type="file" id="image" name="image" accept="image/*" onchange="previewImage(event)" style="display: none;">
+        <img id="preview" src=""style="height: auto; width: 250px;"/>
+        <script>
+          function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+              var preview = document.getElementById('preview');
+              preview.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+          }
+          </script>
     {{post.csrf_token()}}
-    activity
-    {{post.activity}}
-    location
-    {{post.location}}
-    weather
-    {{post.weather}}
-    equipment
-    {{post.equipment}}
-    cost
-    {{post.cost}}
-    {{post.comment}}
-    {{post.submit(value="Upload")}}
+    <br>
+  
+    {{post.activity(class="form-control", placeholder="Activity")}}
+    <br>
+    
+    {{post.location(class="form-control", placeholder="Location")}}
+    <br>
+    
+    {{post.weather(class="form-control", placeholder="Weather")}}
+    <br>
+    
+    {{post.equipment(class="form-control", placeholder="Equipment")}}
+    <br>
+    
+    {{post.cost(class="form-control", placeholder="Cost")}}
+    <br>
+    
+    {{post.comment(class="form-control", placeholder="Comment")}}
+    <br>
+    {{post.submit(value="Upload", class="button")}}
+  </label>   
+  </div>
+</div>
   </form>
-
+ </section>
 {%endblock%}

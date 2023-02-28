@@ -1,16 +1,23 @@
 {%extends 'base.html'%}
 
 {%block body%}
+
+<div class="d-flex justify-content-center d-flex flex-wrap">
 {%for img in images%}
-<section>
-    <div>
-        <a href="/posts/{{ img.activity.user_id }}"><ul><h1>{{img.user.username}}</h1></ul></a>
-        <img src="{{ img.image_path }}" alt="ig" style="height: auto; width: 500px;">
+
+    <div class="card" style="width: 30rem; background-color: transparent; border-bottom-color: rgb(0, 0, 0); border-bottom-width: 10px;" >
+        <div class="card-body">
+        <a class="card-title" href="/posts/{{ img.user_id }}" style="text-decoration: none; color: cornsilk;" ><ul><h1> {{img.user.username}}</h1></ul></a>
+        <img class="card-img-top" src="{{ img.image_path }}" alt="ig">
             <h3>Activity</h3>
+            <div class="card-text">
             <li>{{img.activity.kind}}</li>
-            <h3>Location</h3  
+            <h3>Location</h3>  
             <li>{{img.location}}</li>
+            </div>
         </div>
-    </section>
+    </div>
+    
     {%endfor%}
+</div>
 {%endblock%}

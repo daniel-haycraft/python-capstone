@@ -1,21 +1,20 @@
 {%extends 'base.html'%}
 
 {%block body %}
+<section class="d-flex justify-content-center" style="padding-top: 200px;">
 <form action="{{ url_for('register')}}" method="POST">
-    <h6>Email</h6>
     {{register.csrf_token()}}
-    {{register.email}}
-    <br>
-    <h6> username</h6>
-    <br>
-    {{register.username}}
-    <br>
+    <h6  >Email</h6>
+    {{ register.email(type="email", class_="form-control my-class", id="exampleInputEmail1", aria_describedby="emailHelp", placeholder="Enter email", style="width: 400px;") }}
+    <h6> Username</h6>
+    {{register.username(type="username", class_="form-control my-class", id="exampleInputEmail1", placeholder="Enter your Username", style="width: 400px;")}}
     <h6>Password</h6>
-    {{register.password(type='password')}}
-    <br>
+    {{register.password(type="password", class_="form-control", id="exampleInputPassword1", placeholder="Password", style="width: 400px;")}}
     <h6>Password</h6>
-    {{register.double_password(type='password')}}
-    {{register.submit}}
-  
+    {{register.double_password(type="password", class_="form-control", id="exampleInputPassword1", placeholder="Confirm Password", style="width: 400px;")}}
+<div style='padding-top: 10px;'>
+    {{register.submit(class='btn btn-primary' )}}
+</div>    
 </form>
+</section>
 {%endblock%}
