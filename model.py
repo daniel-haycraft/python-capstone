@@ -146,7 +146,7 @@ def connect_to_db(flask_app, db_uri=os.environ["POSTGRES_URI"]):
 
 
 if __name__ == "__main__":
-    from server import app
+    from app import app
     connect_to_db(app)
 
 
