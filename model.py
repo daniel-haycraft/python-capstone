@@ -136,7 +136,6 @@ class Comment(db.Model):
 
 
 def connect_to_db(flask_app, uri=os.environ["DATABASE_URL"]):
-    
     if uri.startswith("postgres://"):
         uri = uri.replace("postgres://", "postgresql://", 1)
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = uri

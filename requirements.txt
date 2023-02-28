@@ -25,6 +25,7 @@ MarkupSafe==2.1.2
 mccabe==0.7.0
 platformdirs==3.0.0
 plum-py==0.8.5
+psycopg2==2.9.5
 psycopg2-binary==2.9.3
 pylint==2.16.2
 python-dotenv==0.21.1
