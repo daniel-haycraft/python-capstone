@@ -135,7 +135,7 @@ class Comment(db.Model):
         return cls(comment = comment, user_id= user_id, image_id = image_id)
 
 
-def connect_to_db(flask_app, db_uri=os.environ["POSTGRES_URI"]):
+def connect_to_db(flask_app, db_uri=os.environ["DATABASE_URL"]):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
