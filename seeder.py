@@ -4,13 +4,13 @@ from random import choice, randint
 from datetime import datetime
 
 import model
-import server
+import app
 
-with server.app.app_context():
+with app.app.app_context():
         os.system('dropdb capstone')
         os.system('createdb capstone')
 
-        model.connect_to_db(server.app)
+        model.connect_to_db(app.app)
         model.db.create_all()
         
         for n in range(1,5):
