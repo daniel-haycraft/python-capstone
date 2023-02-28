@@ -135,10 +135,13 @@ class Comment(db.Model):
         return cls(comment = comment, user_id= user_id, image_id = image_id)
 
 
-def connect_to_db(flask_app, db_uri=os.environ["DATABASE_URL"]):
-    flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
+def connect_to_db(flask_app, uri=os.environ["DATABASE_URL"]):
+    
+    if uri.startswith("postgres://"):
+        uri = uri.replace("postgres://", "postgresql://", 1)
+    flask_app.config["SQLALCHEMY_DATABASE_URI"] = uri
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
+    
     db.app = flask_app
     db.init_app(flask_app)
 
