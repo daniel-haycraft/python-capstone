@@ -146,7 +146,7 @@ def upload():
     if request.method == 'POST':
         image_file = request.files.get('image')
         if image_file is not None:
-            upload_result = cloudinary.uploader.upload(image_file, folder='capstone', format='png')
+            upload_result = cloudinary.uploader.upload(image_file, folder='new', format='png')
             image_url = upload_result['secure_url']
             new_activity = Activity.create_activity(activity, cost, current_user.id)
             db.session.add(new_activity)
