@@ -139,10 +139,10 @@ def connect_to_db(flask_app, uri=os.environ["DATABASE_URL"]):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = uri
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     
-    db.app = flask_app
     db.init_app(flask_app)
 
     print("Connected to the db!")
+    return db
 
 
 if __name__ == "__main__":

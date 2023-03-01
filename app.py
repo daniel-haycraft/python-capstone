@@ -8,7 +8,9 @@ from model import connect_to_db, User, UserMixin, Image, Activity, db, Tool, Com
 from forms import RegisterForm, UserForm, CreatePost
 from jinja2 import StrictUndefined
 
+
 app = Flask(__name__)
+db = connect_to_db(app)
 
 app.secret_key = 'dev'
 
