@@ -4,7 +4,7 @@ from flask_login import LoginManager, current_user, login_user, logout_user, log
 from datetime import timedelta
 import json
 
-from model import connect_to_db, User, UserMixin, Image, Activity, db, Tool, Comment
+from model import db ,connect_to_db, User, UserMixin, Image, Activity, Tool, Comment
 from forms import RegisterForm, UserForm, CreatePost
 from jinja2 import StrictUndefined
 
